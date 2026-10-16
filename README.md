@@ -10,7 +10,7 @@
 [![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)](https://developer.mozilla.org/en-US/docs/Web/CSS)
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](LICENSE)
 
-**[Live Demo](#)** &nbsp;·&nbsp; **[Report a Bug](https://github.com/skshamiul7/-Numera/issues)** &nbsp;·&nbsp; **[Request a Feature](https://github.com/skshamiul7/-Numera/issues)**
+**[Live Demo](https://numera-jdm0.onrender.com/)** &nbsp;·&nbsp; **[Report a Bug](https://github.com/skshamiul7/-Numera/issues)** &nbsp;·&nbsp; **[Request a Feature](https://github.com/skshamiul7/-Numera/issues)**
 
 </div>
 
