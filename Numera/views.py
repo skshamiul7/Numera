@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render as django_render
 import math
 import functools
 from collections import Counter
@@ -47,6 +47,15 @@ TOOL_META = {
     'happy':          ("Happy Number Check",          "Sum of squares of digits eventually equals 1?", "Check"),
     'kaprekar':       ("Kaprekar's Constant (6174)",  "Enter a 4-digit number to reach 6174.", "Run"),
 }
+
+
+def render(request, template_name, context=None, content_type=None, status=None, using=None):
+    tool_context = getattr(request, '_tool_context', None)
+    if tool_context:
+        context = dict(context or {})
+        for key, value in tool_context.items():
+            context.setdefault(key, value)
+    return django_render(request, template_name, context, content_type, status, using)
 
 
 # ============================================================
@@ -128,26 +137,13 @@ def tool_view(func):
 
     @functools.wraps(func)
     def wrapper(request, *args, **kwargs):
-        # Track this tool as recently used
         track_recent(request, name)
-
-        from django.shortcuts import render as dj_render
-
-        def patched_render(req, template, context=None, *a, **kw):
-            context = dict(context) if context else {}
-            context.setdefault('title', title)
-            context.setdefault('description', description)
-            context.setdefault('submit_label', submit_label)
-            return dj_render(req, template, context, *a, **kw)
-
-        # Patch django.shortcuts.render inside the module namespace of func
-        module = __import__(func.__module__, fromlist=['render'])
-        original_render = module.render
-        module.render = patched_render
-        try:
-            return func(request, *args, **kwargs)
-        finally:
-            module.render = original_render
+        request._tool_context = {
+            'title': title,
+            'description': description,
+            'submit_label': submit_label,
+        }
+        return func(request, *args, **kwargs)
 
     return wrapper
 
