@@ -1,6 +1,6 @@
 from html.parser import HTMLParser
 
-from django.test import TestCase, override_settings
+from django.test import SimpleTestCase, override_settings
 from django.urls import reverse
 
 from .views import TOOL_META
@@ -35,7 +35,7 @@ TEST_STORAGES = {
 
 
 @override_settings(STORAGES=TEST_STORAGES)
-class ToolPageTests(TestCase):
+class ToolPageTests(SimpleTestCase):
     def test_all_navigation_links_open_a_page(self):
         response = self.client.get(reverse('home'))
         self.assertEqual(response.status_code, 200)
@@ -57,6 +57,12 @@ class ToolPageTests(TestCase):
             with self.subTest(tool=name):
                 response = self.client.get(reverse(name))
                 self.assertEqual(response.status_code, 200)
+
+    def test_recent_tools_work_without_database_sessions(self):
+        response = self.client.get(reverse('lcm'))
+
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(self.client.get(reverse('home')), 'Recently Used')
 
     def test_modular_exponentiation_calculates_result(self):
         response = self.client.post(

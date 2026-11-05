@@ -10,7 +10,7 @@
 [![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)](https://developer.mozilla.org/en-US/docs/Web/CSS)
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](LICENSE)
 
-**[Live Demo](https://numera-jdm0.onrender.com/)** &nbsp;·&nbsp; **[Report a Bug](https://github.com/skshamiul7/-Numera/issues)** &nbsp;·&nbsp; **[Request a Feature](https://github.com/skshamiul7/-Numera/issues)**
+**[Live Demo](https://numera-jdm0.onrender.com/)** &nbsp;·&nbsp; **[Report a Bug](https://github.com/skshamiul7/Numera/issues)** &nbsp;·&nbsp; **[Request a Feature](https://github.com/skshamiul7/Numera/issues)**
 
 </div>
 
@@ -132,21 +132,32 @@ Whether you need to check if a number is prime, convert between number systems, 
 
 | Layer | Technology |
 |-------|------------|
-| **Backend** | Django 4.x (Python 3.10+) |
+| **Backend** | Django 5.x or 6.0 (Python 3.10+) |
 | **Frontend** | Pure HTML5 + CSS3 |
 | **Templating** | Django Templates |
-| **Database** | SQLite (development) |
+| **Database** | Not required; recent tools use signed-cookie sessions |
 | **Styling** | Custom CSS with CSS variables (dark/light theme) |
-| **JS** | Minimal vanilla JS (theme toggle, search, mobile menu) |
+| **JS** | Minimal vanilla JS (theme toggle, search, responsive dropdown navigation) |
 
 ---
 
+## 🚀 Run locally
+
+```bash
+pip install -r requirements.txt
+python manage.py runserver
+```
+
+The math tools do not require a database. Set `SECRET_KEY` in the deployment
+environment for production. On Render, use `./build.sh` as the build command
+and `gunicorn Numera.wsgi:application` as the start command.
+
+---
 
 👤 Author
 Shamiul Islam
 
 GitHub: @skshamiul7
 
-Project Link: https://github.com/skshamiul7/-Numera
+Project Link: https://github.com/skshamiul7/Numera
 Live Demo: https://numera-jdm0.onrender.com/
-
